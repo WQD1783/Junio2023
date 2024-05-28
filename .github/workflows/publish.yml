@@ -60,8 +60,8 @@ jobs:
         needs: test
         env:
             GITHUB_LOGIN: ${{ github.actor }}
-            GITHUB_PACKAGES: ${{ secrets.GITHUB_TOKEN }}
-            GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_PACKAGES: ${{ secrets.PUBLISHING_TOKEN }}
+            GITHUB_OAUTH: ${{ secrets.PUBLISHING_TOKEN }}
         steps:
         -   name: This step creates a copy of the repository for the workflow to run on
             uses: actions/checkout@v3
