@@ -62,7 +62,7 @@ test {
 }
 
 // 4.2 Publish
-version = '0.0.0-practica2024'
+version = '0.0.0-practica2023'
 
 publishing {
     repositories {
@@ -81,8 +81,8 @@ publishing {
     publications {
         gpr(MavenPublication) {
             groupId = 'us.mitfs.WQD1783'
-            artifactId = 'practica2024'
-            version = '0.0.0-practica2024'
+            artifactId = 'practica2023test'
+            version = '0.0.0-practica2023'
 
             from components.java
         }
