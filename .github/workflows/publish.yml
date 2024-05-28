@@ -1,0 +1,81 @@
+name: (CI/CD) - Assembling, testing and publishing
+on:
+    workflow_dispatch:
+    push: 
+        branches: [ WQD1783 ]
+
+
+jobs:
+    assemble:
+        runs-on: ubuntu-latest
+        env:
+            GITHUB_LOGIN: ${{ github.actor }}
+            GITHUB_PACKAGES: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+        -   name: This step creates a copy of the repository for the workflow to run on
+            uses: actions/checkout@v3
+        -   name: This step sets up java on the machine running this workflow
+            uses: actions/setup-java@v3
+            with:
+                distribution: 'temurin'
+                java-version: '16'
+            
+        -   name: Assembling the gradle project
+            run: |
+                chmod +x gradlew        
+                ./gradlew assemble
+
+        -   name: This is my UVUS
+            run: |
+                echo "My UVUS is WQD1783"
+
+    test:
+        runs-on: ubuntu-latest
+        needs: assemble
+        env:
+            GITHUB_LOGIN: ${{ github.actor }}
+            GITHUB_PACKAGES: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+        -   name: This step creates a copy of the repository for the workflow to run on
+            uses: actions/checkout@v3
+        -   name: This step sets up java on the machine running this workflow
+            uses: actions/setup-java@v3
+            with:
+                distribution: 'temurin'
+                java-version: '16'
+            
+        -   name: Testing the gradle project.
+            run: |
+                chmod +x gradlew        
+                ./gradlew test
+
+        -   name: This is my UVUS
+            run: |
+                echo "My UVUS is WQD1783"
+
+    publish:
+        runs-on: ubuntu-latest
+        needs: test
+        env:
+            GITHUB_LOGIN: ${{ github.actor }}
+            GITHUB_PACKAGES: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+        -   name: This step creates a copy of the repository for the workflow to run on
+            uses: actions/checkout@v3
+        -   name: This step sets up java on the machine running this workflow
+            uses: actions/setup-java@v3
+            with:
+                distribution: 'temurin'
+                java-version: '16'
+            
+        -   name: Publishing the gradle project
+            run: |
+                chmod +x gradlew        
+                ./gradlew publish
+
+        -   name: This is my UVUS
+            run: |
+                echo "My UVUS is WQD1783"
